@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :todo-list="todoList"/>
   </div>
 </template>
 
@@ -12,6 +11,14 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      todoList: [
+        {number: 1, task: "sample task", status: false},
+        {number: 2, task: "sample task2", status: false}
+      ],
+    }
   }
 }
 </script>
