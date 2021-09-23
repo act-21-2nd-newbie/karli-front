@@ -9,7 +9,7 @@
     <div class="body">
       <div class="todos">
         <div v-for="(todo, index) in todoList" :key="todo.task">
-          <Todo :number="index" :task="todo.task" :status="todo.status"/>
+          <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
         </div>
       </div>
     </div>
@@ -44,6 +44,9 @@ export default {
   methods: {
     onInput(value) {
       this.$emit('input', value);
+    },
+    onClickComplete(number) {
+      this.$emit('complete-button-clicked', number);
     }
   }
 }

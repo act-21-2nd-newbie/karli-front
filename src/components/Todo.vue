@@ -1,7 +1,7 @@
 <template>
   <div class="todo">
-    <input type="checkbox" id="status" name="status" />
-    <label for="status" v-show="true">{{ task }}</label>
+    <input @click="onClickComplete" type="checkbox" id="task" name="task" />
+    <label for="task" v-show="true">{{ task }}</label>
     <button>x</button>
   </div>
 </template>
@@ -12,8 +12,17 @@ export default {
   props: {
     number: Number,
     task: String,
-    status: Boolean,
+    status: {
+      type: Boolean,
+      default: false,
+    }
   },
+  methods: {
+    onClickComplete() {
+      this.$emit('complete-button-clicked', this.number);
+    }
+  }
+  ,
   computed: {
   }
 }
