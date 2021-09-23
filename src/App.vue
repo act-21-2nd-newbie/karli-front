@@ -19,6 +19,11 @@ export default {
         {number: 2, task: "sample task2", status: false}
       ],
     }
+  },
+  methods: {
+    input(value) {
+      this.todoList.push({number:this.todoList.size+1, task:value, status:false});
+    }
   }
 }
 </script>

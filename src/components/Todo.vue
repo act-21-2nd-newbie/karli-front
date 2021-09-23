@@ -1,5 +1,5 @@
 <template>
-  <div class="todo" @click="onClickTodo">
+  <div class="todo">
     <input type="checkbox" id="t" name="t">
     <label for="t" v-show="true">{{ task }}</label>
   </div>
@@ -16,11 +16,6 @@ export default {
   computed: {
     showTask() {
       return this.task;
-    }
-  },
-  methods: {
-    onClickTodo() {
-      this.$emit('todo-clicked', this.number, this.status);
     }
   }
 }

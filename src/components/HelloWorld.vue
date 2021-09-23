@@ -3,9 +3,8 @@
 
     <div class="header">
       <h1>todos</h1>
-      <input
-          placeholder="What needs to be done?"
-          class="new-todo">
+      <input class="new-todo" @input="$emit('input', $event.target.value)" :task="value"
+          placeholder="What needs to be done?" />
     </div>
 
     <div class="body">
@@ -17,12 +16,10 @@
     </div>
 
     <div class="footer">
-      <span class="todo-count"><strong>0</strong>" items left "</span>
-      <ul class="filters">
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
-      </ul>
+      <span class="todo-count"><strong>0</strong> items left </span>
+      <button>All</button>
+      <button>Active</button>
+      <button>Completed</button>
     </div>
   </div>
 </template>
