@@ -3,13 +3,12 @@
 
     <div class="header">
       <h1>todos</h1>
-      <input class="new-todo" @input="$emit('input', $event.target.value)" :task="value"
-          placeholder="What needs to be done?" />
+      <BaseInput :value="value" @input="onInput"/>
     </div>
 
     <div class="body">
       <div class="todos">
-        <div v-for="(todo, index) in todoList" :key="todo.name">
+        <div v-for="(todo, index) in todoList" :key="todo.task">
           <Todo :number="index" :task="todo.task" :status="todo.status"/>
         </div>
       </div>
@@ -26,22 +25,25 @@
 
 <script>
 import Todo from "./Todo"
+import BaseInput from "@/components/BaseInput";
 
 export default {
   name: 'HelloWorld',
   components: {
+    BaseInput,
     Todo
   },
   props: {
     todoList: Array,
-  },
-  methods: {
-    onClickTodo() {
-
+    value: {
+      type: String,
+      default: '',
     }
   },
-  computed: {
-
+  methods: {
+    onInput(value) {
+      this.$emit('input', value);
+    }
   }
 }
 </script>

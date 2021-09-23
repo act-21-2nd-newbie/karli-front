@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld :todo-list="todoList"/>
+    <HelloWorld :todo-list="todoList" @input="onInput"/>
   </div>
 </template>
 
@@ -16,12 +16,12 @@ export default {
     return {
       todoList: [
         {number: 1, task: "sample task", status: false},
-        {number: 2, task: "sample task2", status: false}
+        {number: 2, task: "sample task2", status: false},
       ],
     }
   },
   methods: {
-    input(value) {
+    onInput(value) {
       this.todoList.push({number:this.todoList.size+1, task:value, status:false});
     }
   }

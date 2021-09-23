@@ -1,7 +1,7 @@
 <template>
   <div class="todo">
-    <input type="checkbox" id="t" name="t">
-    <label for="t" v-show="true">{{ task }}</label>
+    <input type="checkbox" id="status" name="status" />
+    <label for="status" v-show="true">{{ task }}</label>
   </div>
 </template>
 
@@ -14,9 +14,6 @@ export default {
     status: Boolean,
   },
   computed: {
-    showTask() {
-      return this.task;
-    }
   }
 }
 </script>
