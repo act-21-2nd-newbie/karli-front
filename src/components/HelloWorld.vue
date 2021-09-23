@@ -9,11 +9,11 @@
     <div class="body">
       <div class="todos">
         <div v-if="showAll">
-          <div v-for="(todo, index) in all" :key="todo.task">
+          <div v-for="(todo, index) in todoList" :key="todo.task">
             <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
           </div>
         </div>
-        <div v-else-if="showActive">
+        <!--div v-else-if="showActive">
           <div v-for="(todo, index) in active" :key="todo.task">
             <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
           </div>
@@ -22,7 +22,7 @@
           <div v-for="(todo, index) in completed" :key="todo.task">
             <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
           </div>
-        </div>
+        </div-->
       </div>
     </div>
 
@@ -49,10 +49,7 @@ export default {
   props: {
     todoList: Array,
     statusToShow: String,
-    value: {
-      type: String,
-      default: '',
-    }
+    value: String, //for input
   },
   computed: {
     showAll() {
@@ -67,11 +64,17 @@ export default {
     all(todoList) {
       return todoList;
     },
-    active(todoList) {
-      return todoList.filter(todo => !todo.status)
+    active: function (todoList) {
+      let active = todoList.filter(function (todo) {
+        return todo.status === false;
+      });
+      return active;
     },
     completed(todoList) {
-      return todoList.filter(todo => todo.status)
+      let completed = todoList.filter(function (todo) {
+        return todo.status === true;
+      });
+      return completed;
     }
   },
   methods: {

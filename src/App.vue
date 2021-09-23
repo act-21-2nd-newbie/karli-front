@@ -26,10 +26,7 @@ export default {
         {number: 2, task: "sample task2", status: false},
       ],
       statusForAll: Boolean,
-      statusToShow: {
-        type: String,
-        default: 'All',
-      },
+      statusToShow: 'All',
     }
   },
   methods: {
@@ -37,7 +34,7 @@ export default {
       this.todoList.push({number:this.todoList.size+1, task:value, status:false});
     },
     onClickComplete(number) {
-      this.todoList[number].status = this.todoList[number].status == true? false:true;
+      this.todoList[number].status = this.todoList[number].status != true;
       //Vue.set(this.todoList[number], status, true);
     },
     onClickCompleteAll() {
