@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <HelloWorld :todo-list="todoList" @input="onInput" @complete-button-clicked="onClickComplete"/>
+    <HelloWorld :todo-list="todoList"
+                @input="onInput"
+                @complete-button-clicked="onClickComplete"
+                @complete-all-button-clicked="onClickCompleteAll"
+    />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import Vue from "vue";
 
 export default {
   name: 'App',
@@ -19,6 +22,7 @@ export default {
         {number: 1, task: "sample task", status: false},
         {number: 2, task: "sample task2", status: false},
       ],
+      statusForAll: Boolean,
     }
   },
   methods: {
@@ -28,6 +32,12 @@ export default {
     onClickComplete(number) {
       this.todoList[number].status = this.todoList[number].status == true? false:true;
       //Vue.set(this.todoList[number], status, true);
+    },
+    onClickCompleteAll() {
+      this.statusForAll = this.statusForAll !== true;
+      this.todoList = this.todoList.map(s=>({
+        number:s.number, task:s.task, status:this.statusForAll
+      }));
     },
   }
 }

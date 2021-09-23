@@ -3,7 +3,7 @@
 
     <div class="header">
       <h1>todos</h1>
-      <BaseInput :value="value" @input="onInput"/>
+      <BaseInput :value="value" @input="onInput" @complete-all-button-clicked="onClickCompleteAll"/>
     </div>
 
     <div class="body">
@@ -47,6 +47,9 @@ export default {
     },
     onClickComplete(number) {
       this.$emit('complete-button-clicked', number);
+    },
+    onClickCompleteAll() {
+      this.$emit('complete-all-button-clicked');
     }
   }
 }
@@ -68,4 +71,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-  <button>check all</button>
+  <button @click="onClickCompleteAll">check all</button>
   <input @keyup.enter="$emit('input', $event.target.value)" :value="value"
          placeholder="What needs to be done?" />
   </div>
@@ -16,6 +16,9 @@ export default {
     }
   },
   methods: {
+    onClickCompleteAll() {
+      this.$emit('complete-all-button-clicked');
+    }
   }
 }
 </script>
