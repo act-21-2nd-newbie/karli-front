@@ -15,10 +15,11 @@
     </div>
 
     <div class="footer">
-      <span class="todo-count"><strong>0</strong> items left </span>
+      <span class="todo-count"><strong>{{ todoList.length }}</strong> items left </span>
       <button>All</button>
       <button>Active</button>
       <button>Completed</button>
+      <button>Clear Completed</button>
     </div>
   </div>
 </template>

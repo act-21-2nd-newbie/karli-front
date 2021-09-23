@@ -2,6 +2,7 @@
   <div class="todo">
     <input type="checkbox" id="status" name="status" />
     <label for="status" v-show="true">{{ task }}</label>
+    <button>x</button>
   </div>
 </template>
 
