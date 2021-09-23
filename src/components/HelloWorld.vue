@@ -27,7 +27,7 @@
     </div>
 
     <div class="footer">
-      <span class="todo-count"><strong>{{ todoList.length }}</strong> items left </span>
+      <span class="todo-count"><strong>{{ active.length }}</strong> items left </span>
       <button @click="$emit('all-button-clicked')">All</button>
       <button @click="$emit('active-button-clicked')">Active</button>
       <button @click="$emit('completed-button-clicked')">Completed</button>
