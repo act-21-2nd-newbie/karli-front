@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <HelloWorld :todo-list="todoList"
+    <HelloWorld :todo-list="todoList" :status-to-show="statusToShow"
                 @input="onInput"
                 @complete-button-clicked="onClickComplete"
                 @complete-all-button-clicked="onClickCompleteAll"
+                @all-button-clicked="onClickAll"
+                @active-button-clicked="onClickActive"
+                @completed-button-clicked="onClickCompleted"
     />
   </div>
 </template>
@@ -23,6 +26,10 @@ export default {
         {number: 2, task: "sample task2", status: false},
       ],
       statusForAll: Boolean,
+      statusToShow: {
+        type: String,
+        default: 'All',
+      },
     }
   },
   methods: {
@@ -38,6 +45,15 @@ export default {
       this.todoList = this.todoList.map(s=>({
         number:s.number, task:s.task, status:this.statusForAll
       }));
+    },
+    onClickAll() {
+      this.statusToShow='All';
+    },
+    onClickActive() {
+      this.statusToShow='Active';
+    },
+    onClickCompleted() {
+      this.statusToShow='Completed';
     },
   }
 }

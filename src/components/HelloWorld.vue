@@ -8,17 +8,29 @@
 
     <div class="body">
       <div class="todos">
-        <div v-for="(todo, index) in todoList" :key="todo.task">
-          <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+        <div v-if="showAll">
+          <div v-for="(todo, index) in all" :key="todo.task">
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+          </div>
+        </div>
+        <div v-else-if="showActive">
+          <div v-for="(todo, index) in active" :key="todo.task">
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+          </div>
+        </div>
+        <div v-else-if="showCompleted">
+          <div v-for="(todo, index) in completed" :key="todo.task">
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
       <span class="todo-count"><strong>{{ todoList.length }}</strong> items left </span>
-      <button>All</button>
-      <button>Active</button>
-      <button>Completed</button>
+      <button @click="$emit('all-button-clicked')">All</button>
+      <button @click="$emit('active-button-clicked')">Active</button>
+      <button @click="$emit('completed-button-clicked')">Completed</button>
       <button>Clear Completed</button>
     </div>
   </div>
@@ -36,9 +48,30 @@ export default {
   },
   props: {
     todoList: Array,
+    statusToShow: String,
     value: {
       type: String,
       default: '',
+    }
+  },
+  computed: {
+    showAll() {
+      return this.statusToShow === 'All';
+    },
+    showActive() {
+      return this.statusToShow === 'Active';
+    },
+    showCompleted() {
+      return this.statusToShow === 'Completed';
+    },
+    all(todoList) {
+      return todoList;
+    },
+    active(todoList) {
+      return todoList.filter(todo => !todo.status)
+    },
+    completed(todoList) {
+      return todoList.filter(todo => todo.status)
     }
   },
   methods: {
@@ -50,7 +83,7 @@ export default {
     },
     onClickCompleteAll() {
       this.$emit('complete-all-button-clicked');
-    }
+    },
   }
 }
 </script>
