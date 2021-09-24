@@ -5,7 +5,7 @@
              autofocus="autofocus" autocomplete="off"
              placeholder="What needs to be done?" />
     </div>
-    <div style="float:left">
+    <div>
       <label class="view" :class="todoList.length>0?'':'complete-all'">
         <input type="checkbox">
         <span :class="statusForAll?'complete-all-click-active':'complete-all-click'" @click="onClickCompleteAll" />
@@ -35,36 +35,30 @@ export default {
 
 <style scoped>
 
-.input {
-  position: relative;
-  margin: 0;
-  line-height: 1.4em;
-  color: inherit;
-  border: 0;
-}
 .new-todo {
-  position: relative;
+  padding: 16px 16px 16px 60px;
+  border: 0;
+  background: rgba(0,0,0,0.003);
+  box-shadow: inset 0 -2px 1px 0 rgba(0,0,0,0.03);
+  /*box-shadow: 0 4px 17px rgba(0,0,0,0.2);*/
+  box-sizing: border-box;
+  outline: none;
+  float: right;
   font-size: 24px;
   font-family: inherit;
-  font-weight: inherit;
+  font-weight: 100;
   width: 100%;
-  outline: none;
-  border: 0;
-  padding: 16px 16px 16px 50px;
-  background: rgba(0,0,0,0.003);
-  box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 .new-todo::-webkit-input-placeholder {
   font-style: italic;
-  font-weight: 300;
+  font-weight: 100;
   color: #e6e6e6;
 }
 .new-todo::-moz-placeholder {
   font-style: italic;
-  font-weight: 300;
+  font-weight: 100;
   color: #e6e6e6;
 }
 

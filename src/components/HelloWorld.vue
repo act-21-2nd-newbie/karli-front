@@ -109,7 +109,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .todo-app {
-  background: #fff;
+  font: inherit;
   margin: 130px 0 40px 0;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),
@@ -122,7 +122,7 @@ h1 {
   font-weight: 100;
   font-size: 100px;
   text-align: center;
-  color: olive;
+  color: #00807e1c;
   text-rendering: optimizeLegibility;
 }
 h3 {
