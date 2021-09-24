@@ -167,6 +167,10 @@ a {
   text-align: center;
 }
 
+.footer {
+  display: none;
+}
+
 
 .todo-count {
   float: left;
