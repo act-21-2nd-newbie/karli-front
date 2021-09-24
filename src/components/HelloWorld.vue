@@ -5,7 +5,6 @@
       <h1>todos</h1>
       <BaseInput :value="value" @input="onInput" :todo-list="todoList" :status-for-all="statusForAll" @complete-all-button-clicked="onClickCompleteAll"/>
     </div>
-
     <div class="body">
       <div class="todos">
         <div v-if="showAll">
@@ -111,6 +110,7 @@ export default {
 .todo-app {
   font: inherit;
   margin: 130px 0 40px 0;
+  line-height: 4em;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2),
               0 25px 50px 0 rgba(0,0,0,0.1);
