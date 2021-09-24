@@ -29,9 +29,9 @@
     <div class="footer">
       <span class="todo-count">{{ active.length }} items left </span>
       <div class="filters">
-        <button @click="$emit('all-button-clicked')">All</button>
-        <button @click="$emit('active-button-clicked')">Active</button>
-        <button @click="$emit('completed-button-clicked')">Completed</button>
+        <button @click="onClickAll">All</button>
+        <button @click="onClickActive">Active</button>
+        <button @click="onClickCompleted">Completed</button>
       </div>
       <button class="clear-completed" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
     </div>
@@ -90,7 +90,17 @@ export default {
     },
     onClickClear(number) {
       this.$emit('clear-button-clicked', number);
+    },
+    onClickAll() {
+      this.$emit('all-button-clicked');
+    },
+    onClickActive() {
+      this.$emit('active-button-clicked');
+    },
+    onClickCompleted() {
+      this.$emit('completed-button-clicked');
     }
+
   }
 }
 </script>
@@ -134,7 +144,6 @@ a {
   z-index: 2;
   border-top: 1px solid #e6e6e6;
 }
-
 
 .footer {
   color: #777;
@@ -190,6 +199,7 @@ a {
 }
 
 .clear-completed {
+  display: none;
   float: right;
   position: relative;
   text-decoration: none;
@@ -198,15 +208,13 @@ a {
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 3px;
-
 }
 .clear-completed:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 430px) {
-  .footer {
-    height: 50px;
-  }
+.todos + .clear-completed {
+  display: block;
 }
+
 </style>

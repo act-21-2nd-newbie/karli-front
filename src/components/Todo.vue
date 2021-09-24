@@ -2,7 +2,7 @@
   <div class="todo">
     <div class="view">
       <input class="toggle" @click="onClickComplete" type="checkbox" id="task" name="task" />
-      <label for="task" v-show="true">{{ task }}</label>
+      <label id="label" for="task" v-show="true">{{ task }}</label>
     </div>
     <button class="clear" @click="onClickClear">x</button>
   </div>
@@ -22,6 +22,11 @@ export default {
   methods: {
     onClickComplete() {
       this.$emit('complete-button-clicked', this.number);
+     /* let checkBox = document.getElementsByClassName("toggle");
+      let taskLabel = document.getElementsByClassName("label");
+      if (checkBox.checked === true) {
+        taskLabel.style.textDecoration = "line-through";
+      }*/
     },
     onClickClear() {
       this.$emit('clear-button-clicked', this.number);
@@ -41,7 +46,7 @@ export default {
   font-size: 24px;
   border-bottom: 1px solid #ededed;
 }
-/*
+
 
 .toggle {
   text-align: center;
@@ -52,21 +57,12 @@ export default {
   bottom: 0;
   margin: auto 0;
   border: none;
-  -webkit-appearance: none;
-  appearance: none;
 }
 
-.toggle + label {
-  background-color: #2c3e50;
-  background-repeat: no-repeat;
-  background-position: center left;
-}
 .toggle:checked + label {
-  background-color: #42b983;
-  background-repeat: no-repeat;
-  background-position: center left;
+  text-decoration: line-through;
 }
-*/
+
 .view {
   display: flex;
   align-content: center;
@@ -104,6 +100,5 @@ label {
 .clear:hover {
   color: darkolivegreen;
 }
-
 
 </style>

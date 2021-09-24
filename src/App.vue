@@ -45,7 +45,6 @@ export default {
     },
     onClickAll() {
       this.statusToShow='All';
-      return this.todoList;
     },
     onClickActive() {
       this.statusToShow='Active';

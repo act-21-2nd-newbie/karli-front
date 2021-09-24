@@ -42,11 +42,11 @@ input::-moz-placeholder {
   font-weight: 300;
   color: #e6e6e6;
 }
-
 button {
   background-color: transparent;
   border: none;
   right: 100%;
   bottom: 100%;
 }
+
 </style>
