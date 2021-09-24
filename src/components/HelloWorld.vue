@@ -26,14 +26,14 @@
       </div>
     </div>
 
-    <div class="footer">
+    <div v-bind:class="all.length > 0?'footer-active':'footer'">
       <span class="todo-count">{{ active.length }} items left </span>
       <div class="filters">
         <button v-bind:class="statusToShow==='All'?'filter-active':'filter'" @click="onClickAll">All</button>
         <button v-bind:class="statusToShow==='Active'?'filter-active':'filter'" @click="onClickActive">Active</button>
         <button v-bind:class="statusToShow==='Completed'?'filter-active':'filter'" @click="onClickCompleted">Completed</button>
       </div>
-      <button v-bind:class="active.length < all.length?'clear-completed':'nothing-to-clear'" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
+      <button v-bind:class="active.length < all.length?'clear-completed-active':'clear-completed'" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
     </div>
 
   </div>
@@ -145,7 +145,7 @@ a {
   border-top: 1px solid #e6e6e6;
 }
 
-.footer {
+.footer-active {
   color: #777;
   padding: 10px 15px;
   height: 20px;
@@ -153,7 +153,7 @@ a {
   border-top: 1px solid #e6e6e6;
 }
 
-.footer {
+.footer-active {
   right: 0;
   left: 0;
   bottom: 0;
@@ -166,6 +166,7 @@ a {
               0 17px 2px -6px rgba(0,0,0,0.2);
   text-align: center;
 }
+
 
 .todo-count {
   float: left;
@@ -207,7 +208,7 @@ a {
   border-color: #808000;
 }
 
-.clear-completed {
+.clear-completed-active {
   float: right;
   margin: 3px;
   padding: 3px 7px;
@@ -219,13 +220,13 @@ a {
   border: 1px solid transparent;
   border-radius: 3px;
 }
-.clear-completed:hover {
+.clear-completed-active:hover {
   text-decoration: underline;
   margin: 3px;
   padding: 3px 7px;
 }
 
-.nothing-to-clear {
+.clear-completed {
   display: none;
   margin: 3px;
   padding: 3px 7px;
