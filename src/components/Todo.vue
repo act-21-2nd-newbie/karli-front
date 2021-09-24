@@ -33,6 +33,10 @@ export default {
 
 <style scoped>
 .todo {
-
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
 }
 </style>
