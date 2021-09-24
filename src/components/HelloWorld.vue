@@ -33,7 +33,7 @@
         <button v-bind:class="statusToShow==='Active'?'filter-active':'filter'" @click="onClickActive">Active</button>
         <button v-bind:class="statusToShow==='Completed'?'filter-active':'filter'" @click="onClickCompleted">Completed</button>
       </div>
-      <button class="clear-completed" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
+      <button v-bind:class="active.length === 0?'clear-completed':'nothing-to-clear'" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
     </div>
 
   </div>
@@ -154,7 +154,6 @@ a {
 }
 
 .footer {
-  content: '';
   right: 0;
   left: 0;
   bottom: 0;
@@ -171,6 +170,8 @@ a {
 .todo-count {
   float: left;
   text-align: left;
+  margin: 3px;
+  padding: 3px 7px;
 }
 
 .filters {
@@ -208,6 +209,8 @@ a {
 
 .clear-completed {
   float: right;
+  margin: 3px;
+  padding: 3px 7px;
   position: relative;
   text-decoration: none;
   cursor: pointer;
@@ -218,10 +221,14 @@ a {
 }
 .clear-completed:hover {
   text-decoration: underline;
+  margin: 3px;
+  padding: 3px 7px;
 }
 
-.todos + .clear-completed {
-  display: block;
+.nothing-to-clear {
+  display: none;
+  margin: 3px;
+  padding: 3px 7px;
 }
 
 </style>
