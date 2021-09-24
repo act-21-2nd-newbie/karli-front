@@ -80,7 +80,6 @@ export default {
   color: white;
 }
 .complete {
-  content: "\2713";
   position: absolute;
   left: 20px;
   height: 25px;
@@ -90,7 +89,6 @@ export default {
 }
 .complete:after {
   content: "\2713";
-  position: absolute;
   font-size: 20px;
   font-weight: 200;
   top: 0;

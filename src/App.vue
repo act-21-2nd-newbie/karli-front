@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld :todo-list="todoList" :status-to-show="statusToShow"
+    <HelloWorld :todo-list="todoList" :status-to-show="statusToShow" :status-for-all="statusForAll"
                 @input="onInput"
                 @complete-button-clicked="onClickComplete"
                 @complete-all-button-clicked="onClickCompleteAll"
@@ -25,7 +25,7 @@ export default {
     return {
       todoList: [
       ],
-      statusForAll: Boolean,
+      statusForAll: false,
       statusToShow: 'All',
     }
   },

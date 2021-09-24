@@ -3,7 +3,7 @@
 
     <div class="header">
       <h1>todos</h1>
-      <BaseInput :value="value" @input="onInput" @complete-all-button-clicked="onClickCompleteAll"/>
+      <BaseInput :value="value" @input="onInput" :todo-list="todoList" :status-for-all="statusForAll" @complete-all-button-clicked="onClickCompleteAll"/>
     </div>
 
     <div class="body">
@@ -52,6 +52,7 @@ export default {
   props: {
     todoList: Array,
     statusToShow: String,
+    statusForAll: Boolean,
     value: String, //for input
   },
   computed: {
@@ -152,7 +153,13 @@ a {
   text-align: center;
   border-top: 1px solid #e6e6e6;
 }
+.check-button-active #checkAll {
+  display: block;
 
+}
+.check-button #checkAll {
+  display: none;
+}
 .footer-active {
   right: 0;
   left: 0;
