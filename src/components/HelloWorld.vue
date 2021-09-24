@@ -197,9 +197,9 @@ a {
 .filter-active {
   margin: 3px;
   padding: 3px 7px;
-  border: 1px solid #2c3e50 !important;
-  background-color: transparent !important;
-  border-radius: 3px !important;
+  border: 1px solid #2c3e50;
+  background-color: transparent;
+  border-radius: 3px;
 }
 
 .filter-active:hover {
