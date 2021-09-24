@@ -2,7 +2,7 @@
   <div class="todo">
     <input @click="onClickComplete" type="checkbox" id="task" name="task" />
     <label for="task" v-show="true">{{ task }}</label>
-    <button>x</button>
+    <button @click="onClickClear">x</button>
   </div>
 </template>
 
@@ -20,7 +20,10 @@ export default {
   methods: {
     onClickComplete() {
       this.$emit('complete-button-clicked', this.number);
-    }
+    },
+    onClickClear() {
+      this.$emit('clear-button-clicked', this.number);
+    },
   }
   ,
   computed: {

@@ -10,17 +10,17 @@
       <div class="todos">
         <div v-if="showAll">
           <div v-for="(todo, index) in all" :key="todo.task">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
         <div v-else-if="showActive">
           <div v-for="(todo, index) in active" :key="todo.task">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
         <div v-else-if="showCompleted">
           <div v-for="(todo, index) in completed" :key="todo.task">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete"/>
+            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
       <button @click="$emit('all-button-clicked')">All</button>
       <button @click="$emit('active-button-clicked')">Active</button>
       <button @click="$emit('completed-button-clicked')">Completed</button>
-      <button>Clear Completed</button>
+      <button @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
     </div>
   </div>
 </template>
@@ -85,6 +85,9 @@ export default {
     onClickCompleteAll() {
       this.$emit('complete-all-button-clicked');
     },
+    onClickClear(number) {
+      this.$emit('clear-button-clicked', number);
+    }
   }
 }
 </script>

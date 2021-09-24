@@ -7,6 +7,8 @@
                 @all-button-clicked="onClickAll"
                 @active-button-clicked="onClickActive"
                 @completed-button-clicked="onClickCompleted"
+                @clear-completed-button-clicked="onClickClearCompleted"
+                @clear-button-clicked="onClickClear"
     />
   </div>
 </template>
@@ -53,6 +55,23 @@ export default {
     onClickCompleted() {
       this.statusToShow='Completed';
     },
+    onClickClearCompleted() {
+      this.todoList = this.todoList.filter(function (todo) {
+        return todo.status === false;
+      });
+    },
+    onClickClear(number) {
+
+/*
+      console.log(number);
+      let idx = this.todoList.findIndex(function (todo) {
+        return todo.number === number;
+      });
+      console.log(idx);
+
+      this.todoList.splice(idx, 1);
+*/
+    }
   }
 }
 </script>
