@@ -1,6 +1,8 @@
 <template>
   <div class="todo">
-    <label class="view" v-bind:class="status === true?'complete-view':'active-view'">{{ task }}
+    <label class="view" v-bind:class="status === true?'complete-view':'active-view'"
+          @dblclick="$emit('input', $event.target.value)"
+    >{{ task }}
       <input type="checkbox" >
       <span v-bind:class="status === true?'complete':'active'" @click="onClickComplete"/>
     </label>

@@ -34,8 +34,8 @@ export default {
       this.todoList.push({number: this.todoList.length+1, task:value, status:false});
     },
     onClickComplete(number) {
-      this.todoList[number].status = this.todoList[number].status != true;
-      //Vue.set(this.todoList[number], status, true);
+      let clickComplete = {number: number, task: this.todoList[number].task, status:this.todoList[number].status !== true}
+      this.todoList.splice(number, 1, clickComplete)
     },
     onClickCompleteAll() {
       this.statusForAll = this.statusForAll !== true;
@@ -59,7 +59,12 @@ export default {
     },
     onClickClear(number) {
       this.todoList.splice(number, 1);
+    },
+/*
+    update({number, value}) {
+      this.todoList.set()
     }
+*/
   }
 }
 </script>
