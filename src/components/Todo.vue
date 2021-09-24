@@ -1,10 +1,10 @@
 <template>
   <div class="todo">
-    <div class="view">
-      <input class="toggle" @click="onClickComplete" type="checkbox" id="task" name="task" />
-      <label id="label" for="task" v-show="true">{{ task }}</label>
-    </div>
-    <button class="clear" @click="onClickClear">x</button>
+    <label class="view" v-bind:class="status === true?'complete-view':'active-view'">{{ task }}
+      <input type="checkbox" >
+      <span v-bind:class="status === true?'complete':'active'" @click="onClickComplete"/>
+    </label>
+    <button class="clear" @click="onClickClear">&#215;</button>
   </div>
 </template>
 
@@ -22,23 +22,18 @@ export default {
   methods: {
     onClickComplete() {
       this.$emit('complete-button-clicked', this.number);
-     /* let checkBox = document.getElementsByClassName("toggle");
-      let taskLabel = document.getElementsByClassName("label");
-      if (checkBox.checked === true) {
-        taskLabel.style.textDecoration = "line-through";
-      }*/
     },
     onClickClear() {
       this.$emit('clear-button-clicked', this.number);
     },
-  }
-  ,
+  },
   computed: {
   }
 }
 </script>
 
 <style scoped>
+
 .todo {
   margin: 0;
   padding: 0;
@@ -47,33 +42,63 @@ export default {
   border-bottom: 1px solid #ededed;
 }
 
-
-.toggle {
-  text-align: center;
-  width: 40px;
-  height: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
-  border: none;
-}
-
-.toggle:checked + label {
-  text-decoration: line-through;
-}
-
 .view {
   display: flex;
-  align-content: center;
-}
-
-label {
   word-break: break-all;
   padding: 15px 15px 15px 60px;
-  display: block;
   line-height: 1.2;
   transition: color 0.4s;
+}
+
+.view input {
+  position: absolute;
+  height: 0;
+  width: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+/* set label */
+.active-view {
+  text-decoration: none;
+}
+
+.complete-view {
+  text-decoration: line-through;
+  font-weight: 300;
+  color: #e6e6e6;
+}
+
+/* draw checkbox */
+.active {
+  position: absolute;
+  left: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid #e6e6e6;
+  color: white;
+}
+.complete {
+  content: "\2713";
+  position: absolute;
+  left: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid olive;
+}
+.complete:after {
+  content: "\2713";
+  position: absolute;
+  font-size: 20px;
+  font-weight: 200;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: olive;
+  text-align: center;
 }
 
 .clear {
@@ -85,9 +110,8 @@ label {
   width: 40px;
   height: 40px;
   margin: auto 0;
-  font-size: 30px;
+  margin-bottom: 13px;
   color: olive;
-  margin-bottom: 11px;
   background-color: transparent;
   border-color: transparent;
   transition: color 0.2s ease-out;
@@ -95,6 +119,7 @@ label {
 
 .view:hover + .clear {
   display: block;
+  font-size: 40px;
 }
 
 .clear:hover {
