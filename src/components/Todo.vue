@@ -1,13 +1,19 @@
 <template>
-  <div class="todo">
-    <label class="view" v-bind:class="status === true?'complete-view':'active-view'"
-          @dblclick="$emit('input', $event.target.value)"
-    >{{ task }}
-      <input type="checkbox" >
-      <span v-bind:class="status === true?'complete':'active'" @click="onClickComplete"/>
-    </label>
-    <button class="clear" @click="onClickClear">&#215;</button>
+  <div class="view">
+    <div :class="edit.number !== number?'todo':'edit'">
+      <label :class="status === true?'complete-view':'active-view'"
+             @dblclick="handleUpdate(number, '')" >
+        {{ task }}
+        <input type="checkbox" >
+        <span v-bind:class="status === true?'complete':'active'" @click="onClickComplete"/>
+      </label>
+      <button class="clear" @click="onClickClear">&#215;</button>
+    </div>
+    <input :class="edit.number === number?'edit-task-active':'edit-task'"
+           autofocus="autofocus" autocomplete="off"
+           @keyup.enter="updateTodo($event.target.value)" :edit="edit">
   </div>
+
 </template>
 
 <script>
@@ -19,7 +25,19 @@ export default {
     status: {
       type: Boolean,
       default: false,
-    }
+    },
+    clicked: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      edit: {
+        number: -1,
+        value: " ",
+      }
+    };
   },
   methods: {
     onClickComplete() {
@@ -28,6 +46,18 @@ export default {
     onClickClear() {
       this.$emit('clear-button-clicked', this.number);
     },
+    handleUpdate(number, value) {
+      this.clicked = !this.clicked;
+      this.edit = {
+        number,
+        value
+      }
+    },
+    updateTodo(value) {
+      this.edit.value = value;
+      this.$emit('update', this.edit);
+      this.edit.number = -1;
+    }
   },
   computed: {
   }
@@ -35,24 +65,41 @@ export default {
 </script>
 
 <style scoped>
-
+.view {
+}
 .todo {
   margin: 0;
-  padding: 0;
   position: relative;
   font-size: 24px;
+  width: content-box;
   border-bottom: 1px solid #ededed;
-}
-
-.view {
   display: flex;
   word-break: break-all;
   padding: 15px 15px 15px 60px;
   line-height: 1.2;
   transition: color 0.4s;
 }
+.edit {
+  display: none;
+}
 
-.view input {
+.edit-task-active {
+  padding: 16px 16px 16px 16px;
+  border: 0;
+  background: white;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.edit-task {
+  display: none;
+}
+
+.todo input{
   position: absolute;
   height: 0;
   width: 0;
@@ -61,18 +108,18 @@ export default {
 }
 
 /* set label */
-.active-view {
+.todo .active-view {
   text-decoration: none;
 }
 
-.complete-view {
+.todo .complete-view {
   text-decoration: line-through;
   font-weight: 300;
   color: #e6e6e6;
 }
 
 /* draw checkbox */
-.active {
+.todo .active {
   position: absolute;
   left: 20px;
   height: 25px;
@@ -81,7 +128,7 @@ export default {
   border: 1px solid #e6e6e6;
   color: white;
 }
-.complete {
+.todo .complete {
   position: absolute;
   left: 20px;
   height: 25px;
@@ -89,7 +136,7 @@ export default {
   border-radius: 50%;
   border: 1px solid olive;
 }
-.complete:after {
+.todo .complete:after {
   content: "\2713";
   font-size: 20px;
   font-weight: 200;
@@ -101,8 +148,8 @@ export default {
   text-align: center;
 }
 
-.clear {
-  display: none;
+.todo:hover .clear {
+  display: block;
   position: absolute;
   top: 0;
   right: 10px;
@@ -115,14 +162,15 @@ export default {
   background-color: transparent;
   border-color: transparent;
   transition: color 0.2s ease-out;
-}
-
-.view:hover + .clear {
-  display: block;
   font-size: 40px;
+
 }
 
-.clear:hover {
+.clear {
+  display:none;
+}
+
+.todo .clear:hover {
   color: darkolivegreen;
 }
 

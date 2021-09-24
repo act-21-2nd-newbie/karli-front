@@ -9,7 +9,8 @@
       <div class="todos">
         <div v-if="showAll">
           <div v-for="(todo, index) in all" :key="todo.number">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
+            <Todo :number="index" :task="todo.task" :status="todo.status" :edit="edit"
+                  @update="updateTodo" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
         <div v-else-if="showActive">
@@ -53,6 +54,7 @@ export default {
     statusToShow: String,
     statusForAll: Boolean,
     value: String, //for input
+    edit: {number: Number, value: String},
   },
   computed: {
     showAll() {
@@ -82,6 +84,9 @@ export default {
     onInput(value) {
       this.$emit('input', value);
     },
+    updateTodo(edit) {
+      this.$emit('update', edit);
+    },
     onClickComplete(number) {
       this.$emit('complete-button-clicked', number);
     },
@@ -99,8 +104,7 @@ export default {
     },
     onClickCompleted() {
       this.$emit('completed-button-clicked');
-    }
-
+    },
   }
 }
 </script>

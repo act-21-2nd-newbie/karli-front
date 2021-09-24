@@ -2,6 +2,7 @@
   <div id="app">
     <HelloWorld :todo-list="todoList" :status-to-show="statusToShow" :status-for-all="statusForAll"
                 @input="onInput"
+                @update="updateTodo"
                 @complete-button-clicked="onClickComplete"
                 @complete-all-button-clicked="onClickCompleteAll"
                 @all-button-clicked="onClickAll"
@@ -9,6 +10,8 @@
                 @completed-button-clicked="onClickCompleted"
                 @clear-completed-button-clicked="onClickClearCompleted"
                 @clear-button-clicked="onClickClear"
+                @update-todo="updateTodo"
+
     />
   </div>
 </template>
@@ -60,11 +63,10 @@ export default {
     onClickClear(number) {
       this.todoList.splice(number, 1);
     },
-/*
-    update({number, value}) {
-      this.todoList.set()
-    }
-*/
+    updateTodo({number, value}) {
+      let updateTask = {number: number, task: value, status:this.todoList[number].status}
+      this.todoList.splice(number, 1, updateTask)
+    },
   }
 }
 </script>
