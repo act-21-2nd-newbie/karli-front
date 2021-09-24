@@ -28,6 +28,7 @@ export default {
   methods: {
     onClickCompleteAll() {
       this.$emit('complete-all-button-clicked');
+
     }
   }
 }
