@@ -33,7 +33,7 @@
         <button v-bind:class="statusToShow==='Active'?'filter-active':'filter'" @click="onClickActive">Active</button>
         <button v-bind:class="statusToShow==='Completed'?'filter-active':'filter'" @click="onClickCompleted">Completed</button>
       </div>
-      <button v-bind:class="active.length === 0?'clear-completed':'nothing-to-clear'" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
+      <button v-bind:class="active.length < all.length?'clear-completed':'nothing-to-clear'" @click="$emit('clear-completed-button-clicked')">Clear Completed</button>
     </div>
 
   </div>
