@@ -24,8 +24,6 @@ export default {
   data() {
     return {
       todoList: [
-        {number: 1, task: "sample task", status: false},
-        {number: 2, task: "sample task2", status: false},
       ],
       statusForAll: Boolean,
       statusToShow: 'All',
@@ -33,7 +31,7 @@ export default {
   },
   methods: {
     onInput(value) {
-      this.todoList.push({number:this.todoList.size+1, task:value, status:false});
+      this.todoList.push({number: this.todoList.length+1, task:value, status:false});
     },
     onClickComplete(number) {
       this.todoList[number].status = this.todoList[number].status != true;
@@ -61,16 +59,7 @@ export default {
       });
     },
     onClickClear(number) {
-
-/*
-      console.log(number);
-      let idx = this.todoList.findIndex(function (todo) {
-        return todo.number === number;
-      });
-      console.log(idx);
-
-      this.todoList.splice(idx, 1);
-*/
+      this.todoList.splice(number, 1);
     }
   }
 }
