@@ -18,6 +18,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import {get} from "./service/todo-service"
 
 export default {
   name: 'App',
@@ -31,6 +32,10 @@ export default {
       statusForAll: false,
       statusToShow: 'All',
     }
+  },
+  async mounted() {
+    this.todoList = await get();
+    //console.log(a)
   },
   methods: {
     onInput(value) {
