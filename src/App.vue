@@ -18,7 +18,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import { get, post } from "./service/todo-service"
+import { get, post, patch, put, clear } from "./service/todo-service"
 
 export default {
   name: 'App',
@@ -47,16 +47,21 @@ export default {
       this.todoList.push(tempTodo);
       await post(tempTodo);
     },
-    onClickComplete(number) {
-      let clickComplete = {number: number, task: this.todoList[number].task, status:this.todoList[number].status !== true}
-      this.todoList.splice(number, 1, clickComplete)
+
+    async onClickComplete(number) {
+      let tempTodo = { number: number, task: this.todoList[number].task, status:this.todoList[number].status !== true};
+      this.todoList.splice(number, 1, tempTodo);
+      await patch(tempTodo);
     },
-    onClickCompleteAll() {
+    async onClickCompleteAll() {
       this.statusForAll = this.statusForAll !== true;
       this.todoList = this.todoList.map(s=>({
         number:s.number, task:s.task, status:this.statusForAll
       }));
+      //complete all by put
+      await put(this.todoList);
     },
+
     onClickAll() {
       this.statusToShow='All';
     },
@@ -66,17 +71,23 @@ export default {
     onClickCompleted() {
       this.statusToShow='Completed';
     },
-    onClickClearCompleted() {
+
+    async onClickClearCompleted() {
       this.todoList = this.todoList.filter(function (todo) {
         return todo.status === false;
       });
+      //clear completed by put
+      await put(this.todoList);
     },
-    onClickClear(number) {
+    async onClickClear(number) {
       this.todoList.splice(number, 1);
+      await clear(number);
     },
-    updateTodo({number, value}) {
+
+    async updateTodo({number, value}) {
       let updateTask = {number: number, task: value, status:this.todoList[number].status}
-      this.todoList.splice(number, 1, updateTask)
+      this.todoList.splice(number, 1, updateTask);
+      await patch(updateTask);
     },
   }
 }

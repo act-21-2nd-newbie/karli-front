@@ -26,7 +26,33 @@ async function post(tempTodo) {
     await axios.post("api/tasks/", newTodo);
 }
 
-export{ get, post }
+async function patch(tempTodo) {
+    let newTodo = {
+        "id": tempTodo.number,
+        "details": tempTodo.task,
+        "status": tempTodo.status
+    };
+    await axios.patch("api/tasks/${newTodo.id}", newTodo);
+}
+
+async function put(todoList) {
+    //clear all, complete all
+
+    todoList.map((x) => {
+        return {
+            "id": x.number,
+            "details": x.task,
+            "status": x.status
+        }
+    });
+
+    await axios.put("api/tasks", todoList);
+}
+
+async function clear(number) {
+    await axios.delete('api/tasks/', number);
+}
+export{ get, post, patch, put, clear }
 
 
 
