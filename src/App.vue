@@ -18,7 +18,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import {get} from "./service/todo-service"
+import { get, post } from "./service/todo-service"
 
 export default {
   name: 'App',
@@ -38,8 +38,14 @@ export default {
     //console.log(a)
   },
   methods: {
-    onInput(value) {
-      this.todoList.push({number: this.todoList.length+1, task:value, status:false});
+    async onInput(value) {
+      let tempTodo = {
+        number: this.todoList.length+1,
+        task: value,
+        status: false
+      };
+      this.todoList.push(tempTodo);
+      await post(tempTodo);
     },
     onClickComplete(number) {
       let clickComplete = {number: number, task: this.todoList[number].task, status:this.todoList[number].status !== true}

@@ -8,6 +8,7 @@ async function get() {
         task: '',
         status: false
     };
+
     return response.data.map((x) => {
         tempTodo.number = x.id;
         tempTodo.task = x.details;
@@ -15,13 +16,17 @@ async function get() {
         return tempTodo;
     });
 }
-/*
-async function get(id) {
-    const response = await axios.get("api/tasks"+id.toString());
 
-}*/
+async function post(tempTodo) {
+    let newTodo = {
+        "id": tempTodo.number,
+        "details": tempTodo.task,
+        "status": tempTodo.status
+    };
+    await axios.post("api/tasks/", newTodo);
+}
 
-export{ get }
+export{ get, post }
 
 
 
