@@ -3,18 +3,15 @@ import axios from "axios";
 async function get() {
     const response = await axios.get("api/tasks")
     // debugger;
-    let tempTodo = {
-        number: 0,
-        task: '',
-        status: false
-    };
 
     return response.data.map((x) => {
-        tempTodo.number = x.id;
-        tempTodo.task = x.details;
-        tempTodo.status = x.status === "done";
-        return tempTodo;
+        return {"number": x.id, "task": x.details, "status": x.status==="done"};
     });
+}
+
+async function getById(id) {
+    const response = await axios.get("api/tasks", id);
+    return response.data;
 }
 
 async function post(tempTodo) {
@@ -23,7 +20,7 @@ async function post(tempTodo) {
         "details": tempTodo.task,
         "status": tempTodo.status
     };
-    await axios.post("api/tasks/", newTodo);
+    return await axios.post("api/tasks/", newTodo);
 }
 
 async function patch(tempTodo) {
@@ -32,7 +29,7 @@ async function patch(tempTodo) {
         "details": tempTodo.task,
         "status": tempTodo.status
     };
-    await axios.patch("api/tasks/${newTodo.id}", newTodo);
+    return await axios.patch("api/tasks/${newTodo.id}", newTodo);
 }
 
 async function put(todoList) {
@@ -46,13 +43,13 @@ async function put(todoList) {
         }
     });
 
-    await axios.put("api/tasks", todoList);
+    return await axios.put("api/tasks", todoList);
 }
 
 async function clear(number) {
-    await axios.delete('api/tasks/', number);
+    return await axios.delete('api/tasks/', number);
 }
-export{ get, post, patch, put, clear }
+export{ get, post, patch, put, clear, getById }
 
 
 
