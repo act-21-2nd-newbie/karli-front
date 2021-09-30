@@ -40,7 +40,6 @@ export default {
   methods: {
     async onInput(value) {
       let tempTodo = {
-        number: this.todoList.length+1,
         task: value,
         status: false
       };
@@ -49,7 +48,7 @@ export default {
     },
 
     async onClickComplete(number) {
-      let tempTodo = { number: number, task: this.todoList[number].task, status:this.todoList[number].status !== true};
+      let tempTodo = { id: number, task: this.todoList[number].task, status:this.todoList[number].status !== true};
       this.todoList.splice(number, 1, tempTodo);
       await patch(tempTodo);
     },
@@ -85,9 +84,9 @@ export default {
     },
 
     async updateTodo({number, value}) {
-      let updateTask = {number: number, task: value, status:this.todoList[number].status}
-      this.todoList.splice(number, 1, updateTask);
-      await patch(updateTask);
+      let tempTodo = {number: number, task: value, status:this.todoList[number].status}
+      this.todoList.splice(number, 1, tempTodo);
+      await patch(tempTodo);
     },
   }
 }
