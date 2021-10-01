@@ -15,9 +15,8 @@ async function post(tempTodo) {
     return await axios.post("api/todos/", tempTodo);
 }
 
-async function patch(tempTodo) {
-    let todoId = tempTodo.id.toString();
-    return await axios.patch("api/todos/"+todoId, tempTodo);
+async function patch(id, tempTodo) {
+    return await axios.patch("api/todos/"+id, tempTodo);
 }
 
 async function put(todoList) {
@@ -25,8 +24,8 @@ async function put(todoList) {
     return await axios.put("api/todos", todoList);
 }
 
-async function clear(number) {
-    return await axios.delete('api/todos/', number);
+async function clear(id) {
+    return await axios.delete('api/todos/'+id);
 }
 export{ get, post, patch, put, clear, getById }
 

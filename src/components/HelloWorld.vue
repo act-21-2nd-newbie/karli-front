@@ -8,19 +8,21 @@
     <div class="body">
       <div class="todos">
         <div v-if="showAll">
-          <div v-for="(todo, index) in all" :key="todo.number">
-            <Todo :number="index" :task="todo.task" :status="todo.status" :edit="edit"
+          <div v-for="todo in all" :key="todo.id">
+            <Todo :number="todo.id" :task="todo.task" :status="todo.status"  :edit="edit"
                   @update="updateTodo" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
         <div v-else-if="showActive">
-          <div v-for="(todo, index) in active" :key="todo.number">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
+          <div v-for="todo in active" :key="todo.id">
+            <Todo :number="todo.id" :task="todo.task" :status="todo.status" :edit="edit"
+                  @update="updateTodo" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
         <div v-else-if="showCompleted">
-          <div v-for="(todo, index) in completed" :key="todo.number">
-            <Todo :number="index" :task="todo.task" :status="todo.status" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
+          <div v-for="todo in completed" :key="todo.id">
+            <Todo :number="todo.id" :task="todo.task" :status="todo.status" :edit="edit"
+                  @update="updateTodo" @complete-button-clicked="onClickComplete" @clear-button-clicked="onClickClear"/>
           </div>
         </div>
       </div>

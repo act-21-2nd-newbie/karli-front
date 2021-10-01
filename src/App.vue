@@ -47,11 +47,23 @@ export default {
       await post(tempTodo);
     },
 
-    async onClickComplete(number) {
-      let tempTodo = { id: number, task: this.todoList[number].task, status:this.todoList[number].status !== true};
-      this.todoList.splice(number, 1, tempTodo);
-      await patch(tempTodo);
+    async onClickComplete(id) {
+      let idx = this.todoList.findIndex((element) => {
+        return element.id === id;
+      });
+      let tempTodo = { id: id, task: this.todoList[idx].task, status: this.todoList[idx].status !== true};
+      this.todoList.splice(idx, 1, tempTodo);
+      await patch(id, {"status": this.todoList[idx].status});
     },
+    async updateTodo({id, value}) {
+      let idx = this.todoList.findIndex((element) => {
+        return element.id === id;
+      });
+      let tempTodo = { id: id, task: value, status: this.todoList[idx].status }
+      this.todoList.splice(idx, 1, tempTodo);
+      await patch(id, {"task": value.toString()});
+    },
+
     async onClickCompleteAll() {
       this.statusForAll = this.statusForAll !== true;
       this.todoList = this.todoList.map(s=>({
@@ -60,6 +72,23 @@ export default {
       //complete all by put
       await put(this.todoList);
     },
+    async onClickClearCompleted() {
+      this.todoList = this.todoList.filter((todo) => {
+        return todo.status === false;
+      });
+      //clear completed by put
+      await put(this.todoList);
+    },
+
+
+    async onClickClear(id) {
+      let idx = this.todoList.findIndex((element) => {
+        return element.id === id;
+      });
+      this.todoList.splice(idx, 1);
+      await clear(id);
+    },
+
 
     onClickAll() {
       this.statusToShow='All';
@@ -69,24 +98,6 @@ export default {
     },
     onClickCompleted() {
       this.statusToShow='Completed';
-    },
-
-    async onClickClearCompleted() {
-      this.todoList = this.todoList.filter(function (todo) {
-        return todo.status === false;
-      });
-      //clear completed by put
-      await put(this.todoList);
-    },
-    async onClickClear(number) {
-      this.todoList.splice(number, 1);
-      await clear(number);
-    },
-
-    async updateTodo({number, value}) {
-      let tempTodo = {number: number, task: value, status:this.todoList[number].status}
-      this.todoList.splice(number, 1, tempTodo);
-      await patch(tempTodo);
     },
   }
 }
