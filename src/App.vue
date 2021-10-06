@@ -48,12 +48,13 @@ export default {
     },
 
     async onClickComplete(id) {
+
       let idx = this.todoList.findIndex((element) => {
         return element.id === id;
       });
       let tempTodo = { id: id, task: this.todoList[idx].task, status: this.todoList[idx].status !== true};
       this.todoList.splice(idx, 1, tempTodo);
-      await patch(id, {"status": this.todoList[idx].status});
+      await patch(id, {"status": tempTodo.status});
     },
     async updateTodo({id, value}) {
       let idx = this.todoList.findIndex((element) => {
