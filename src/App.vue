@@ -18,7 +18,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import { get, post, patch, put, clear } from "./service/todo-service"
+import { get, post, patch, patchAll, clear, clearAll } from "./service/todo-service"
 
 export default {
   name: 'App',
@@ -69,18 +69,16 @@ export default {
       this.todoList = this.todoList.map(s=>({
         number:s.number, task:s.task, status:this.statusForAll
       }));
-      //complete all by put
-      await put(this.todoList);
+      await patchAll({"status": this.statusForAll});
     },
+
     async onClickClearCompleted() {
       this.todoList = this.todoList.filter((todo) => {
         return todo.status === false;
       });
-      //clear completed by put
-      await put(this.todoList);
+
+      await clearAll(this.todoList);
     },
-
-
     async onClickClear(id) {
       let idx = this.todoList.findIndex((element) => {
         return element.id === id;
